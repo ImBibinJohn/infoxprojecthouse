@@ -1,11 +1,20 @@
 {% extends 'user/user_base.html' %} {% load static %} {% block body %}
+
+<style>
+  @media screen and (max-width:292px){
+    .btn-secondary{
+      margin-bottom: 6px;
+    }
+  }
+  
+</style>
 <div style="text-align: center;">
   <h4 style="position: relative;">Apply for internship</h4>
 </div>
 
 
-<hr style="position: relative;top: 50px;">
-<p style="margin-left: 10%;position: relative;top: 50px;"></p>
+<hr style="position: relative;">
+
 {% if messages %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   {% for message in messages %}
@@ -15,148 +24,139 @@
 </div>
 {% endif %}
 <!--Grid column-->
+<div class="row">
 
-<!--Grid column-->
-<div class="col-md-6 mb-4" style="margin-left: 25%; margin-right: 20%;">
+  <div class="col-md-3 col-12 mb-4"></div>
+  <!--Grid column-->
+  <div class="col-md-6 col-12 mb-4">
 
-  <!--Title-->
+    <!--Title-->
 
-  <section class="pr-1">
+    <section>
 
-    <!-- Material form register -->
-    <div style="text-align: center;">
-      <div class="card" style="top: 80px;">
+      <!-- Material form register -->
+      <div style="text-align: center;">
+        <div class="card">
 
 
 
-        </h5>
+          <!--Card content-->
+          <div class="card-body">
 
-        <!--Card content-->
-        <div class="card-body px-lg-5 pt-0">
+            <!-- Form -->
+            <form action="{% url 'userintership' %}" method="post" onsubmit="return myfun()" style="color: #757575;">
+              {% csrf_token %}
 
-          <!-- Form -->
-          <form action={% url 'userintership' %} method="post" onsubmit="return myfun()" style="color: #757575;">
-            {% csrf_token %}
+              <div class="">
+                <div class="col">
+                  <!-- First name -->
+                  <br>
+                  <div class="md-form">
+                    <label for="materialRegisterFormFirstName" style=" position:relative;top: 8px">Name:</label>
+                    <input type="text" name="name" class="form-control" required style="position: relative;top: 10px;">
+                  </div><br>
+                </div>
+                <div class="col-12">
+                  <!-- Last name -->
+                  <div class="md-form">
+                    <label for="phone" style=" position:relative;top: 8px">Phone No:</label>
+                    <div class="international">
+                      <input type="text" id="phone" name="phonenumber" class="form-control form-control-sm p"
+                        pattern="(\+)*[0-9]{9,}" required style="position: relative;top: 10px;">
+                    </div>
 
-            <div class="form-row">
-              <div class="col">
-                <!-- First name -->
-                <br>
-                <div class="md-form">
-                  <label for="materialRegisterFormFirstName" style=" position:relative;top: 8px">Name:</label>
-                  <input type="text" name="name" class="form-control" required style="position: relative;top: 10px;">
+                  </div>
+                  <div class="mt-2" id="messages" style="color:red;"></div>
+                  <span id="valid-msg" class="hide"></span>
+                  <span id="error-msg" class="hide" style="color:red"></span>
                 </div><br>
               </div>
-              <div class="col-12">
-                <!-- Last name -->
-                <div class="md-form">
-                  <label for="phone" style=" position:relative;top: 8px">Phone No:</label>
-                  <div class="international">
-                    <input type="text" id="phone" name="phonenumber" class="form-control form-control-sm p"
-                      pattern="(\+)*[0-9]{9,}" required style="position: relative;top: 10px;">
-                  </div>
 
-                </div>
-                <div class="mt-2" id="messages" style="color:red;"></div>
-                <span id="valid-msg" class="hide"></span>
-                <span id="error-msg" class="hide" style="color:red"></span>
+              <!-- E-mail -->
+              <div class="md-form mt-0">
+
+                <label for="materialRegisterFormEmail" class="active"
+                  style=" position:relative;top: 8px">E-mail:</label>
+                <input type="email" name="emailid" id="email" class="form-control" required
+                  style="position: relative;top: 10px;">
+              </div>
+              <div class="mt-2" id="emessages" style="color:red"></div>
+
+              <br>
+
+              <div class="md-form mt-0">
+
+                <label for="materialRegisterFormEmail" class="active" style=" position:relative;top: 8px">Platform
+                </label>
+                <input type="text" name="selectplatform" id="" class="form-control" required
+                  style="position: relative;top: 10px;">
+
+
+              </div>
+              <br>
+              <!-- Password -->
+              <div class="md-form">
+
+                <label for="materialRegisterFormPassword" class="active" style=" position:relative;top: 8px">
+                  Qualification</label>
+                <input type="text" name="qualifications" class="form-control" required
+                  style="    position: relative;top: 10px;">
+                <small id="materialProjectname" class="active">
+
+                </small>
               </div><br>
-            </div>
+              <div class="md-form">
 
-            <!-- E-mail -->
-            <div class="md-form mt-0">
+                <label for="materialRegisterFormPassword" class="active"
+                  style=" position:relative;top: 8px">College</label>
+                <input type="text" name="college" class="form-control" required
+                  style="    position: relative;top: 10px;">
+                <small id="materialProjectname" class="active">
 
-              <label for="materialRegisterFormEmail" class="active" style=" position:relative;top: 8px">E-mail:</label>
-              <input type="email" name="emailid" id="email" class="form-control" required
-                style="position: relative;top: 10px;">
-            </div>
-            <div class="mt-2" id="emessages" style="color:red"></div>
+                </small>
+              </div><br>
+              <div class="md-form">
 
-            <br>
+                <label for="materialRegisterFormPassword" class="active" style=" position:relative;top: 8px">Your
+                  location</label>
+                <input type="text" name="location" class="form-control" required
+                  style="    position: relative;top: 10px;">
+                <small id="materialProjectname" class="active">
 
-            <div class="md-form mt-0">
-
-              <label for="materialRegisterFormEmail" class="active" style=" position:relative;top: 8px">Platform
-              </label>
-              <input type="text" name="selectplatform" id="" class="form-control" required
-                style="position: relative;top: 10px;">
-
-
-            </div>
-            <br>
-            <!-- Password -->
-            <div class="md-form">
-
-              <label for="materialRegisterFormPassword" class="active" style=" position:relative;top: 8px">
-                Qualification</label>
-              <input type="text" name="qualifications" class="form-control" required
-                style="    position: relative;top: 10px;">
-              <small id="materialProjectname" class="active">
-
-              </small>
-            </div><br>
-            <div class="md-form">
-
-              <label for="materialRegisterFormPassword" class="active"
-                style=" position:relative;top: 8px">College</label>
-              <input type="text" name="college" class="form-control" required style="    position: relative;top: 10px;">
-              <small id="materialProjectname" class="active">
-
-              </small>
-            </div><br>
-            <div class="md-form">
-
-              <label for="materialRegisterFormPassword" class="active" style=" position:relative;top: 8px">Your
-                location</label>
-              <input type="text" name="location" class="form-control" required
-                style="    position: relative;top: 10px;">
-              <small id="materialProjectname" class="active">
-
-              </small>
-            </div><br>
+                </small>
+              </div><br>
 
 
-            <!-- Phone number -->
+              <!-- Phone number -->
 
 
 
 
 
-            <!-- Sign up button -->
-            <div style="text-align: center;"><button class="btn btn-secondary cancel" type="reset"
-                style="width:80px;background: #B2C1C2;margin-left: 10vh;margin-bottom: 2%;border-radius: 16px;position: relative;bottom: 40px;top: 10px;">Cancel</button>
-              <button class="btn btn-secondary update" type="submit" style="width:80px;
-
-    background: #66F0F5;
-    margin-right: 20px;
-    margin-left: 10px;
-    margin-bottom: 2%;
-    border-radius: 16px;
-    position: relative;
-    bottom: 40px;
-    top: 10px;
-    ">Submit</button>
-            </div>
-            <!-- Social register -->
-          </form>
+              <!-- Sign up button -->
+              <div style="text-align: center;">
+                <button type="submit" class="btn btn-secondary">Reset</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+              <!-- Social register -->
+            </form>
+          </div>
         </div>
       </div>
-    </div>
 
 
 
-  </section>
-  <!--Section: Live preview-->
+    </section>
+    <!--Section: Live preview-->
 
-</div>
-<!--Grid column-->
+  </div>
+  <div class="col-md-3 col-12 mb-4"></div>
+  <!--Grid column-->
 
 </div>
 <!--Grid row-->
 
-</section>
 
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!--<script src={% static 'js/intlTelInput.js' %}></script>-->

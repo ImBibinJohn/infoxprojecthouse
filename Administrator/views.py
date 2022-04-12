@@ -151,7 +151,7 @@ def viewieeedetail(request, id):
 
 def viewprojectdetails(request):
     plat = Addnewplatform.objects.all()
-    project = addnewproject.objects.all()
+    project = Addnewproject.objects.all()
     context = {'plat': plat, 'project': project}
     return render(request, 'Administrator/view_projects_detail.html', context)
 
@@ -198,16 +198,11 @@ def addproject(request):
 
 #display projects based on platform
 def userpythonprojects(request, id):
-    mem = Addnewplatform.objects.get(id=id).platformname
-    print(mem)
-    if request.method != 'POST':
-        plat = Addnewplatform.objects.get(id=id)
-        q_and_a = Q_A.objects.filter(platform_name=mem)
-        project = Addnewproject.objects.filter(selectplatform=mem)
-        context = {'projects': project, 'plat': plat}
-        return render(request, 'Administrator/user_projects.html', context)
-    else:
-        return render(request, 'Administrator/user_dasboard.html')
+    plat = Addnewplatform.objects.filter(id=id)
+    plat1 = Addnewplatform.objects.get(id=id)
+    project = Addnewproject.objects.filter(selectplatform=plat1.platformname)
+    context = {'plat': plat, 'projects': project}
+    return render(request, 'Administrator/user_projects.html', context)
 
 #idsplay projects on platform on view projects page
 def adminprojectsview(request, id):
@@ -1200,14 +1195,13 @@ def deletequestionanswer(request, qandaid):
 
 
 #Jafreena
-def usercreate(request):
-    
+def usercreate(request):   
         if request.method == 'POST':
             fullname = request.POST['name']
-            platformid = request.POST['platformid']
-            level = request.POST['level']
+            platformid = request.POST['pid']
             email = request.POST['email']
             cno  = request.POST['cno']
+            coid  = request.POST['coid']
             password= request.POST['password']
             conformpassword = request.POST['conformpassword']
             if password == conformpassword:
@@ -1216,7 +1210,7 @@ def usercreate(request):
                     return redirect('userreg')
                 else:
                     user = usersign.objects.create(fullname=fullname,platformid=platformid, email=email,
-                                                    level=level,cno=cno,password=password,score=0)
+                                                    level=0,cno=cno,password=password,score=0, course_id=coid)
                     user.save()
                     return redirect('userlog')
             else:
@@ -1225,17 +1219,19 @@ def usercreate(request):
             
 def userlog(request):
     return render(request,'user/userlog.html')
+
 def userreg(request):
-    return render(request,'user/userreg.html')
+    pl=Platform.objects.all()  
+    c=Course.objects.all()  
+    return render(request,'user/userreg.html',{'pl':pl,'c':c})
 
 
 
 def gologins(request):    
     return render(request, 'user/user_login.html')
-def gosignup(request):
-     pl=Platform.objects.all()  
-     c=Course.objects.all()  
-     return render(request, 'user/user_registration.html',{'pl':pl,'c':c})
+
+def gosignup(request):  
+     return render(request, 'user/user_registration.html')
 
 def userlogin(request):   
         if request.method == 'POST':
@@ -1258,8 +1254,7 @@ def userdash(request):
 def userprofile(request):
     l= usersign.objects.get(sid=request.session['login'])
     p= Platform.objects.get(platformid=l.platformid)
-    c= Course.objects.get(courseid=l.course_id)
-   
+    c= Course.objects.get(courseid=l.course_id) 
     return render(request, 'user/profile.html', {'l': l,'p':p,'c':c})
 
 def tutorials(request):
@@ -1307,29 +1302,24 @@ def userlogout(request):
     auth.logout(request)
     return redirect('userlog')   
 
-def edituserprofile(request):
-   
-    l= usersign.objects.get(sid=request.session['login'])
-    p= Platform.objects.get(platformid=request.session['platform'])
-    c= Course.objects.get(courseid=request.session['level'])
+def edituserprofile(request, id):   
+    l= usersign.objects.get(sid=id)
+    p= Platform.objects.get(platformid=l.platformid)
+    c= Course.objects.get(courseid=l.course_id)
     pl=Platform.objects.all()  
     co=Course.objects.all() 
     return render(request,'user/edituserprofile.html',{'l': l,'p':p,'c':c,'pl':pl,'co':co} )
 
-def updateuserprofile(request):
-        l= usersign.objects.get(sid=request.session['login'])
-        
+def updateuserprofile(request, id):
+        l= usersign.objects.get(sid=id)        
         l.fullname = request.POST['name']
         l.platformid = request.POST['platformid']
-        l.level = request.POST['level']
         l.email = request.POST['email']
         l.cno  = request.POST['cno']
-        l.password= request.POST['password']
-        
-
+        l.password = request.POST['password']
         l.save()
         
-        return redirect('gologins')
+        return redirect('userlog')
         
 def certificate(request):
     l= usersign.objects.get(sid=request.session['login'])

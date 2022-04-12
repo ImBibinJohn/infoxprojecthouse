@@ -1,78 +1,116 @@
 {% extends 'user/user_base.html' %} {% load static %} {% block body %} {% for j in vars %}
 
 
+<div class="row">
+    <div class="col-12">
+
+    </div>
+    <div class="col-md-3 mb-4"></div>
+
+
+    <div class="col-md-6 mb-4">
+
+        <div style="text-align: center; margin-top: 5%;">
 
 
 
-<h4 style="position: relative;top: 50px;margin-left: 10%;">
-    {{j.platformname}}
-</h4>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <h4 style="position: relative;margin-top: 5%;">
+                                <center>
+                                    {{j.platformname}}
+                                </center>
 
-<div class="row justify-content-center">
+                            </h4>
+                        </div>
+                        <div class="col-md-12 ">
+                            <center>
+                                <img src="{{j.uploadthumbnail.url}}" alt="..." style="width: 150px;height: 100px;">
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row">
 
+                        <div class="col-md-12 ">
+                            <center>
 
-    <div class="card m-5  ">
-        <div class="card-body" style="width: 500px;">
-            <div class="row">
+                                <label>
+                                    {{j.description}}
 
-                <div class="col-md-12 ">
-                    <center>
-                        <img src="{{j.uploadthumbnail.url}}" alt="..." style="width: 150px;height: 100px;">
-                    </center>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-md-12 ">
-
-                    <label>
-                            {{j.description}}
-                        </label>
+                                </label>
+                            </center>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
 {% endfor %}
-
-
-
-<h4 style="position: relative;top: 50px;margin-left: 10%;">
-    tutorials
-</h4>
 {% for k in mem %}
 
-<div class="row justify-content-center">
+<div class="row">
+    <div class="col-12">
+
+    </div>
+    <div class="col-md-3 mb-4"></div>
 
 
-    <div class="card m-5 " style="box-shadow:2px 2px solid black">
-        <div class="card-body" style="width: 500px;">
-            <div class="row">
+    <div class="col-md-6 mb-4">
+
+        <div style="text-align: center; margin-top: 5%;">
+
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <h4 style="position: relative;margin-top: 5%;">
+                                <center>
+                                    Tutorials
+                                </center>
+
+                            </h4>
+                        </div>
+                        <div class="col-md-12 ">
+                            <center>
 
 
 
 
 
+                                <video src="{{k.tutorial_video.url}}" controls controlsLIst="nodownload" id="videos"
+                                    width="250" height="200" type="video/mp4" controlsLIst="nodownload">
+                            </center>
+                        </div>
+                        </div>
+                        <div class="row">
 
-                <video src="{{k.tutorial_video.url}}" controls controlsLIst="nodownload" id="videos" width="250" height="200" type="video/mp4" controlsLIst="nodownload">
+                            <div class="col-md-12 ">
+                                <center>
 
-                </div>
-                <div class="row">
+                                    <label>
+                                        {{k.description}}
 
-                    <div class="col-md-12 ">
+                                    </label>
+                                </center>
+                            </div>
+                        </div>
 
-                        <label>
-                            {{k.tutorial_discription}}
-                        </label>
                     </div>
+
                 </div>
-
             </div>
-
         </div>
     </div>
-    {% endfor %}
+
+
+{% endfor %}
 
 
 

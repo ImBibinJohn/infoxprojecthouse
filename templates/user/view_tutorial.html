@@ -7,7 +7,7 @@
 
         <div>
             <center>
-                <h4 style="position: relative;"> Select a platform to view tutorials </h4>
+                <h4 style="position: relative;margin-top: 5%;"> Select a platform to view tutorials </h4>
             </center>
         </div>
     </div>
@@ -18,13 +18,13 @@
 
     <div class="col-md-6 mb-4">
 
-        <div style="text-align: center;">
+        <div style="text-align: center; margin-top: 5%;">
 
             <div class="card">
 
                 <div class="card-body px-lg-5 pt-0">
 
-                    <form action='/user_views/' method="post">
+                    <form action='/user_views' method="post">
                         {%csrf_token%}
                         <div class="form-row">
                             <div class="col"> <br>

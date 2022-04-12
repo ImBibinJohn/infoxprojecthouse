@@ -232,8 +232,8 @@ urlpatterns = [
    
     re_path(r'^tutorialview/<int:lectureid>$', views.tutorialview, name='tutorialview'),
     re_path(r'^userlogout$', views.userlogout, name='userlogout'),
-    re_path(r'^edituserprofile$',views.edituserprofile, name='edituserprofile'),
-    re_path(r'^updateuserprofile$',views.updateuserprofile, name='updateuserprofile'),
+    re_path(r'^edituserprofile/(?P<id>\d+)$',views.edituserprofile, name='edituserprofile'),
+    re_path(r'^updateuserprofile/(?P<id>\d+)$',views.updateuserprofile, name='updateuserprofile'),
     re_path(r'^certificate$',views.certificate, name='certificate'),
     re_path(r'^test$',views.test, name='test'),
     re_path(r'^score1$', views.score1, name='score1'),
