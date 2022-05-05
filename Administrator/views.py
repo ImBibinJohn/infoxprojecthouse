@@ -93,7 +93,7 @@ def mainplatform(request):
 def editplatform(request, id):
     plat1 = Addnewplatform.objects.get(id=id)
     context = {'platform': plat1}
-    return render(request, 'Administrator/edit platform.html', context)
+    return render(request, 'Administrator/edit_platform.html', context)
 
 #update platform 
 def updateplatform(request,id):
@@ -106,7 +106,7 @@ def updateplatform(request,id):
     plat1.platformname = request.POST['platformname']
     plat1.description = request.POST['description']
     plat1.save()
-    return render(request, 'Administrator/dashboard.html', )
+    return redirect('adminDash')
 
 #delete platform 
 def deleteplatform(request, id):
@@ -665,10 +665,10 @@ def deleteq(request,id):
     re.delete()
     return redirect('interview_q_a')
 
-def interview_Q_A(request):
-    plat = Addnewplatform.objects.all()
-    s = Q_A.objects.all()
-    return render(request, 'Administrator/user_interview_questions.html', {'s': s, 'plat': plat})
+# def interview_Q_A(request):
+#     plat = Addnewplatform.objects.all()
+#     s = Q_A.objects.all()
+#     return render(request, 'Administrator/user_interview_questions.html', {'s': s, 'plat': plat})
 
 def activate(request):
     name = request.session["a"]
@@ -911,12 +911,12 @@ def addplatform(request):
         return redirect('admin_login')
 
 
-def editplatform(request, platformid):
-    if 'admin' in request.session:
-        plat = Platform.objects.get(platformid=platformid)
-        return render(request, 'Administrator/editplatform.html', {'platform': plat})
-    else:
-        return redirect('admin_login')
+# def editplatform(request, platformid):
+#     if 'admin' in request.session:
+#         plat = Platform.objects.get(platformid=platformid)
+#         return render(request, 'Administrator/editplatform.html', {'platform': plat})
+#     else:
+#         return redirect('admin_login')
 
 
 def addplatforms(request):
@@ -937,20 +937,20 @@ def addplatforms(request):
         return redirect('addplatform')
 
 
-def updateplatform(request, platformid):
-    try:
-        if request.method == 'POST':
-            name = request.POST.get('name')
-            description = request.POST.get('description')
-            plat = Platform.objects.get(platformid=platformid)
-            plat.name = name
-            plat.description = description
-            plat.save()
-            return redirect('platforms')
-        else:
-            return redirect('editplatform')
-    except:
-        return redirect('editplatform')
+# def updateplatform(request, platformid):
+#     try:
+#         if request.method == 'POST':
+#             name = request.POST.get('name')
+#             description = request.POST.get('description')
+#             plat = Platform.objects.get(platformid=platformid)
+#             plat.name = name
+#             plat.description = description
+#             plat.save()
+#             return redirect('platforms')
+#         else:
+#             return redirect('editplatform')
+#     except:
+#         return redirect('editplatform')
 
 
 def deleteplatform(request, platformid):

@@ -19,17 +19,6 @@ urlpatterns = [
 
     #display platform
     re_path(r'^mainplatform$', views.mainplatform, name='mainplatform'),
-
-    #edit platform
-    re_path(r'^mainplatform/editplatform/<int:id>$', views.editplatform, name='editplatform'),
-
-
-    #update platform 
-    re_path(r'^mainplatform/editplatform/updateplatform/<int:id>$', views.updateplatform, name='updateplatform'),
-
-    #delete platform
-    re_path(r'^mainplatform/deleteplatform/<int:id>$', views.deleteplatform,name='deleteplatform'),
-
     #profile
     re_path(r'^myprofile$', views.myprofile, name='myprofile'),
 
@@ -152,7 +141,7 @@ urlpatterns = [
 
     re_path(r'^deleteq/<int:id>$', views.deleteq, name='deleteq'),
 
-    re_path(r'^interview_Q_A$', views.interview_Q_A, name='interview_Q_A'),
+    re_path(r'^interview_q_a$', views.interview_q_a, name='interview_q_a'),
 
     re_path(r'^admin_logout$', views.admin_logout, name='admin_logout'),
 
